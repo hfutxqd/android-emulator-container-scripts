@@ -16,7 +16,9 @@
 # Install all the required emulator dependencies.
 # You can get these by running ./android/scripts/unix/run_tests.sh --verbose --verbose --debs | grep apt | sort -u
 # pulse audio is needed due to some webrtc dependencies.
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list && \
+    sed -i 's|security.debian.org/debian-security|mirrors.aliyun.com/debian-security|g' /etc/apt/sources.list && \
+    apt-get update && apt-get install -y --no-install-recommends \
 # Emulator & video bridge dependencies
     libc6 libdbus-1-3 libfontconfig1 libgcc1 \
     libpulse0 libtinfo5 libx11-6 libxcb1 libxdamage1 \
